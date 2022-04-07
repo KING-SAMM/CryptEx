@@ -12,6 +12,20 @@ client/dist
 client/dist-ssr
 client/*.local
 
+smart_contract/node_modules
+smart_contract/.env
+smart_contract/coverage
+coverage
+smart_contract/coverage.json
+coverage.json
+smart_contract/typechain
+typechain
+
+#Hardhat files
+smart_contract/cache
+smart_contract/artifacts
+
+
 # Editor directories and files
 client/.vscode/*
 !client/.vscode/extensions.json
