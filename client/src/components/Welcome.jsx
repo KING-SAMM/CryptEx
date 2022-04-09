@@ -3,6 +3,8 @@ import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
 
 import { Loader } from './';
+import React, { useContext } from "react";
+import { TransactionContext } from "../context/TransactionContext";
 
 // Common repeated styles
 const commonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-white";
@@ -22,10 +24,7 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 // Welcome (Main) Component 
 const Welcome = () => {
     // Connect Wallet 
-    const connectWallet = () => 
-    {
-
-    }
+    const { connectWallet } = useContext( TransactionContext );
 
     // Handle Submit
     const handleSubmit = () => 
