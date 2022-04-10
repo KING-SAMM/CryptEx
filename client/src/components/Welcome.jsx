@@ -1,9 +1,9 @@
+import React, { useContext } from "react";
 import { AiFillPayCircle } from "react-icons/ai";
 import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
 
 import { Loader } from './';
-import React, { useContext } from "react";
 import { TransactionContext } from "../context/TransactionContext";
 
 // Common repeated styles
@@ -23,8 +23,9 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 
 // Welcome (Main) Component 
 const Welcome = () => {
-    // Connect Wallet 
-    const { connectWallet } = useContext( TransactionContext );
+    // connectWallet and currentAccount, passed in 
+    // via context api from TransactionContext.jsx module
+    const { connectWallet, currentAccount } = useContext( TransactionContext );
 
     // Handle Submit
     const handleSubmit = () => 
@@ -47,16 +48,18 @@ const Welcome = () => {
                         Join millions on CryptEx - the largest cryptocurrency marketplace
                     </p>
 
-                    {/* Blue Button  */}
-                    <button
-                        type="button"
-                        onClick={ connectWallet }
-                        className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
-                    >
-                        <p className="text-white text-base font-semibold">
-                            Connect Wallet
-                        </p>
-                    </button>
+                    {/* Blue Button: Render if there is no current account  */}
+                    { !currentAccount && 
+                        <button
+                            type="button"
+                            onClick={ connectWallet }
+                            className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+                        >
+                            <p className="text-white text-base font-semibold">
+                                Connect Wallet
+                            </p>
+                        </button>
+                    }
 
                     {/* Grid  */}
                     <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
