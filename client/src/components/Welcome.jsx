@@ -25,13 +25,7 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 const Welcome = () => {
     // connectWallet and currentAccount, passed in 
     // via context api from TransactionContext.jsx module
-    const { connectWallet, currentAccount } = useContext( TransactionContext );
-
-    // Handle Submit
-    const handleSubmit = () => 
-    {
-
-    }
+    const { connectWallet, currentAccount, formData, setFormData, handleChange } = useContext( TransactionContext );
 
     return (
         <div className="flex w-full justify-center items-center">
@@ -110,10 +104,10 @@ const Welcome = () => {
 
                     {/* Form  */}
                     <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
-                        <Input type="text" placeholder="Address To" name="addressTo" handleChange={ () => {} } />
-                        <Input type="number" placeholder="Amount (ETH)" name="amount" handleChange={ () => {} } />
-                        <Input type="text" placeholder="Keyword (GIF)" name="keyword" handleChange={ () => {} } />
-                        <Input type="text" placeholder="Enter message" name="message" handleChange={ () => {} } />
+                        <Input type="text" placeholder="Address To" name="addressTo" handleChange={ handleChange } />
+                        <Input type="number" placeholder="Amount (ETH)" name="amount" handleChange={ handleChange } />
+                        <Input type="text" placeholder="Keyword (GIF)" name="keyword" handleChange={ handleChange } />
+                        <Input type="text" placeholder="Enter message" name="message" handleChange={ handleChange } />
 
                         <div className="h-[1px] w-full bg-gray-400 my-2 " />
 
