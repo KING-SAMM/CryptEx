@@ -25,7 +25,22 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 const Welcome = () => {
     // connectWallet and currentAccount, passed in 
     // via context api from TransactionContext.jsx module
-    const { connectWallet, currentAccount, formData, setFormData, handleChange } = useContext( TransactionContext );
+    const { connectWallet, currentAccount, formData, setFormData, sendTransaction, handleChange } = useContext( TransactionContext );
+
+    // Handle Submit
+    const handleSubmit = (e) => 
+    {
+        // Destructure form data from formData object
+        const { addressTo, amount, keyword, message } = formData;
+
+        e.preventDefault();
+        
+        // Check if user has all form fields filled out
+        if( !addressTo || !amount || !keyword || !message ) return;
+        
+        // Call sendTransaction if form is properly filled out
+        sendTransaction();
+    }
 
     return (
         <div className="flex w-full justify-center items-center">

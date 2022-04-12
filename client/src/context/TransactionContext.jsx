@@ -104,6 +104,7 @@ export const TransactionProvider = ({ children }) => {
                 return alert("Please install Metamask");
 
             // Get the data from the form
+            const { addressTo, amount, keyword, message } = formData;
         } catch (error) {
             console.error(error);
             throw new Error("No ethereum object.");
@@ -119,7 +120,7 @@ export const TransactionProvider = ({ children }) => {
 
     // Pass connectWallet over to all components
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange }}>
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction }}>
             {children}
         </TransactionContext.Provider>
     )
