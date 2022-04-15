@@ -18,19 +18,18 @@ const { ethereum } = window;
  */
 const getEthereumContract = () => 
 {
+    console.log("Boom! Contract gotten!");
     // Get the signer
     const provider = new ethers.providers.Web3Provider(ethereum);
     const signer = provider.getSigner();
 
-    // Get the deployed smart contract with the abi, address and signer
-    const transactionContract = new ethers.Contract( contractABI, contractAddress, signer );
 
-    console.log({
-        provider,
-        signer,
-        transactionContract
-    })
-}
+    // Get the deployed smart contract with the abi, address and signer
+    const transactionContract = new ethers.Contract( contractAddress, contractABI, signer );
+
+    return transactionContract;
+    
+};
 
 
 /**
@@ -39,23 +38,33 @@ const getEthereumContract = () =>
  * @params children
  * @returns Transaction context
  */
-
 export const TransactionProvider = ({ children }) => {
-    const [currentAccount, setCurrentAccount] = useState('');
+    const [currentAccount, setCurrentAccount] = useState("");
 
     // Get data from form
-    const [ formData, setFormData ] = useState({ addressTo: "", amount: "", keyword: "", message: "" });
+    const [ formData, setFormData ] = useState({
+        addressTo: '',
+        amount: '',
+        keyword: '',
+        message: ''
+    });
 
+    // Loading state
+    const [  isLoading, setIsLoading ] = useState(false);
+
+    // Store and keep track of transaction count
+    const [ transactionCount, setTransactionCount ] = useState(localStorage.getItem('transactionCount'));
+
+    // Handle input value change
     const handleChange = (e, name) => 
     {
         setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
-    }
+    };
 
     // Check if wallet is connected
     const checkIfWalletIsConnected = async () => {
         try {
-            if (!ethereum)
-                return alert("Please install Metamask");
+            if (!ethereum) return alert("Please install Metamask");
     
             // If Metamask is installed and connected in browser, then 
             // 1. store the selected account in accounts array
@@ -65,6 +74,8 @@ export const TransactionProvider = ({ children }) => {
             if(accounts.length)
             {
                 setCurrentAccount(accounts[0]);
+
+                console.log(accounts[0]);
     
                 // getAllTransactions()
             }
@@ -78,17 +89,19 @@ export const TransactionProvider = ({ children }) => {
         }
     };
 
+  
+    
     // Connect Metamask wallet on button click
     // elsewhere in application
     const connectWallet = async () => {
         try {
-            if (!ethereum)
-                return alert("Please install Metamask");
+            if (!ethereum) return alert("Please install Metamask");
 
             // If Metamask is installed, then
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
             setCurrentAccount(accounts[0]);
+
         } catch (error) {
             console.error(error);
             throw new Error("No ethereum object.");
@@ -100,16 +113,51 @@ export const TransactionProvider = ({ children }) => {
     const sendTransaction = async () => 
     {
         try {
-            if (!ethereum)
-                return alert("Please install Metamask");
-
+            if (!ethereum) return alert("Please install Metamask");
+            
             // Get the data from the form
             const { addressTo, amount, keyword, message } = formData;
+
+            // Convert amount from form (in decimal) to ethers or hex
+            const parsedAmount = ethers.utils.parseEther(amount);
+
+            // Get the Ethereum contract
+            const transactionContract = getEthereumContract();
+
+            // Request/send Transaction with Options
+            await ethereum.request({
+                method: 'eth_sendTransaction',
+                params: [{
+                    from: currentAccount,
+                    to: addressTo,
+                    gas: '0x5208',   // 21000 GWEI
+                    value: parsedAmount._hex
+                }]
+            });
+
+            // Add the transaction to blockchain, this returns the transaction hash
+            const transactionHash = await transactionContract.addToBlockchain( addressTo, parsedAmount, message, keyword );
+
+            // While waiting for transaction to complete..
+            setIsLoading(true);
+            console.log(`Loading... ${ transactionHash.hash }`);
+            await transactionHash.wait();
+
+            // ...on success
+            setIsLoading(false);
+            console.log(`Success... ${ transactionHash.hash }`);
+
+            // Get the transaction count
+            const transactionCount = await transactionContract.getTransactionCount();
+
+            setTransactionCount(transactionCount.toNumber());
+
         } catch (error) {
             console.error(error);
             throw new Error("No ethereum object.");
         }
-    }
+    };
+
 
 
     // Call checkIfWalletIsConnected when application initailly loads
@@ -120,7 +168,7 @@ export const TransactionProvider = ({ children }) => {
 
     // Pass connectWallet over to all components
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, setFormData, handleChange, sendTransaction }}>
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, handleChange, sendTransaction }}>
             {children}
         </TransactionContext.Provider>
     )

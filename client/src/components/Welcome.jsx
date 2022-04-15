@@ -25,22 +25,23 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 const Welcome = () => {
     // connectWallet and currentAccount, passed in 
     // via context api from TransactionContext.jsx module
-    const { connectWallet, currentAccount, formData, setFormData, sendTransaction, handleChange } = useContext( TransactionContext );
+    const { connectWallet, currentAccount, formData, sendTransaction, handleChange } = useContext( TransactionContext );
 
     // Handle Submit
     const handleSubmit = (e) => 
     {
-        // Destructure form data from formData object
         const { addressTo, amount, keyword, message } = formData;
 
         e.preventDefault();
-        
-        // Check if user has all form fields filled out
-        if( !addressTo || !amount || !keyword || !message ) return;
-        
-        // Call sendTransaction if form is properly filled out
+
+        if( !addressTo || !amount || !keyword || !message) return;
+
         sendTransaction();
     }
+
+    // at getEthereumContract (TransactionContext.jsx:26:33)
+    // at sendTransaction (TransactionContext.jsx:114:13)
+    // at handleSubmit (Welcome.jsx:39:9)
 
     return (
         <div className="flex w-full justify-center items-center">
@@ -58,7 +59,7 @@ const Welcome = () => {
                     </p>
 
                     {/* Blue Button: Render if there is no current account  */}
-                    { !currentAccount && 
+                    { !currentAccount && (
                         <button
                             type="button"
                             onClick={ connectWallet }
@@ -68,7 +69,7 @@ const Welcome = () => {
                                 Connect Wallet
                             </p>
                         </button>
-                    }
+                    )}
 
                     {/* Grid  */}
                     <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
@@ -135,7 +136,7 @@ const Welcome = () => {
                                     className="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer"
 
                                 >
-                                    Send Now
+                                    Send Now 
                                 </button>
                             )
                         }
