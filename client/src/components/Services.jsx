@@ -3,9 +3,9 @@ import { BiSearchAlt } from 'react-icons/bi';
 import { RiHeart2Fill } from 'react-icons/ri';
 
 const ServiceCard = ({ color, title, icon, subtitle }) => 
-{
+(
     <div className="flex flex-row justify-start items-center white-glassmorphism p-3 m-2 cursor-pointerhover:shadow-xl">
-        <div className={ `w-10 h-10 rounded-full flex justify-center` }>
+        <div className={ `w-10 h-10 rounded-full flex justify-center items-center ${ color }` }>
             { icon }
         </div>
         <div className="ml-5 flex flex-col flex-1">
@@ -13,7 +13,7 @@ const ServiceCard = ({ color, title, icon, subtitle }) =>
             <p className="mt-2 text-white text-sm md:w-9/12">{ subtitle }</p>
         </div>
     </div>
-}
+);
 
 const Services = () => {
     return (
@@ -35,7 +35,7 @@ const Services = () => {
                     subtitle="Secuurity is guaranteed. We always maintain pruvacy and the quality of our products."
                 />
                 <ServiceCard 
-                    color="bg-[#89845F8]"
+                    color="bg-[#9845F8]"
                     title="Best Exchange Rates"
                     icon={ <BiSearchAlt fontSize={ 21 } className="text-white" /> }
                     subtitle="Secuurity is guaranteed. We always maintain pruvacy and the quality of our products."
