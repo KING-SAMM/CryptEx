@@ -60,6 +60,34 @@ export const TransactionProvider = ({ children }) => {
     {
         setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
     };
+    
+
+    // Get all the transactions
+    const getAllTransactions = async () => 
+    {
+        try 
+        {
+            // Check if Metamask is insatalled
+            if (!ethereum) return alert("Please install Metamask");
+
+            const transactionContract = await getEthereumContract();
+
+            // Get all available transactions using getAllTransactions() method 
+            // on our samrt contract
+            const availableTransactions = await transactionContract.getAllTransactions();
+
+            const structuredTransactions = availableTransactions.map((transaction) => ({
+                addressTo: transaction.receiver,
+                addressFrom: trabaction.sender,
+                timestamp: new Date(transaction.timestamp.toNumber * 1000)
+            }));
+
+            console.log(availableTransactions);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     // Check if wallet is connected
     const checkIfWalletIsConnected = async () => {
@@ -76,8 +104,9 @@ export const TransactionProvider = ({ children }) => {
                 setCurrentAccount(accounts[0]);
 
                 console.log(accounts[0]);
-    
-                // getAllTransactions()
+                
+                // Get and display all available transactiions
+                getAllTransactions();
             }
             else
             {
@@ -89,7 +118,25 @@ export const TransactionProvider = ({ children }) => {
         }
     };
 
-  
+
+    // Verify that transaction exists before rendering on page
+    const checkIfTransactionsExist = async () => 
+    {
+        try {
+            // Get the Ethereum contract
+            const transactionContract = getEthereumContract();
+
+            // Get the transaction count
+            const transactionCount = await transactionContract.getTransactionCount();
+
+            // Set transaction count to equal transaction count in local storage
+            window.localStorage.setItem("transactionCount", transactionCount);
+        } catch (error) {
+            console.error(error);
+            throw new Error("No ethereum object.");
+        }
+    };
+
     
     // Connect Metamask wallet on button click
     // elsewhere in application
@@ -160,9 +207,11 @@ export const TransactionProvider = ({ children }) => {
 
 
 
-    // Call checkIfWalletIsConnected when application initailly loads
+    // Call checkIfWalletIsConnected and checkIfTransactionsExist() 
+    // when application initailly loads
     useEffect(() => {
         checkIfWalletIsConnected();
+        checkIfTransactionsExist();
     }, []);
 
 
@@ -172,5 +221,5 @@ export const TransactionProvider = ({ children }) => {
             {children}
         </TransactionContext.Provider>
     )
-};
+}; 
 
