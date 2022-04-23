@@ -26,7 +26,7 @@ const Input = ({ placeholder, type, name, value, handleChange }) => (
 const Welcome = () => {
     // connectWallet and currentAccount, passed in 
     // via context api from TransactionContext.jsx module
-    const { connectWallet, currentAccount, formData, sendTransaction, handleChange } = useContext( TransactionContext );
+    const { connectWallet, currentAccount, formData, sendTransaction, handleChange, isLoading } = useContext( TransactionContext );
 
     // Handle Submit
     const handleSubmit = (e) => 
@@ -129,7 +129,7 @@ const Welcome = () => {
                         <div className="h-[1px] w-full bg-gray-400 my-2 " />
 
                         {
-                            false ? ( <Loader /> ) 
+                            isLoading ? ( <Loader /> ) 
                             : (
                                 <button
                                     type="button"

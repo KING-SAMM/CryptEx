@@ -40,17 +40,16 @@ const TransactionCard = ({ addressTo, addressFrom, timestamp, message, keyword, 
                             <p className="text-white text-base">Message: { message }</p>
                         </>
                     ) }
+                </div>
+                
+                <img 
+                    src={ gifUrl || url }
+                    alt="gif" 
+                    className="w-full h-64 2x:h-96 rounded-md shadow-lg object-cover" />
 
-                    <img 
-                        src={ gifUrl || url } 
-                        alt="gif" 
-                        className="w-full h-64 2x:h-96 rounded-md shadow-lg object-cover"
-                    />
-
-                    {/* Timestamp  */}
-                    <div className="bg-black p-3 px-5 w-max rounded-3xl mt-5 shadow-2xl">
-                        <p className="text-[#37C7DA] font-bold">{ timestamp }</p>
-                    </div>
+                {/* Timestamp  */}
+                <div className="bg-black p-3 px-5 w-max rounded-3xl mt-5 shadow-2xl">
+                    <p className="text-[#37C7DA] font-bold">{ timestamp }</p>
                 </div>
             </div>
         </div>
@@ -59,7 +58,7 @@ const TransactionCard = ({ addressTo, addressFrom, timestamp, message, keyword, 
 
 // Main transactions component 
 const Transactions = () => {
-    const { currentAccount } = useContext(TransactionContext);
+    const { currentAccount, transactions } = useContext(TransactionContext);
 
     return (
         // Optional text to render depending on whether account is connected or not
@@ -72,7 +71,7 @@ const Transactions = () => {
                 
                 {/* Loop through the dummy data to render each one */}
                 <div className="flex flex-wrap justify-center items-center mt-10">
-                    { dummyData.reverse().map((transaction, i) => 
+                    { transactions.reverse().map((transaction, i) => 
                     (
                         <TransactionCard key={ i } { ...transaction } />
                     )) }

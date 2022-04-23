@@ -224,7 +224,7 @@ export const TransactionProvider = ({ children }) => {
 
     // Pass connectWallet over to all components
     return (
-        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, handleChange, sendTransaction }}>
+        <TransactionContext.Provider value={{ connectWallet, currentAccount, formData, handleChange, sendTransaction, transactions, isLoading }}>
             {children}
         </TransactionContext.Provider>
     )
