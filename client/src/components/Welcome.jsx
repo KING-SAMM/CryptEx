@@ -46,14 +46,14 @@ const Welcome = () => {
 
     return (
         <div className="flex w-full justify-center items-center">
-            <div className="flex flex-col items-start justify-between md:p-20 py-12 px-4">
+            <div className="flex flex-col items-start justify-between md:pt-10 pb-20 py-12 px-4 sm:pt-2">
                 
 
                 {/* Left Side of Layout  */}
                 <div className="flex flex-1 justify-center items-center flex-col mf:mr-10 md:w-[80vw] ">
 
                     {/* Large Welcome Text  */}
-                    <h1 className="text-3xl md:text-20xl sm:text-5xl text-white text-gradient py-1">
+                    <h1 className="text-3xl md:text-7xl sm:text-5xl text-white text-gradient py-1">
                         Trade in Crypto <br /> Trade with CryptEx
                     </h1>
                     <p className="text-center mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
@@ -98,10 +98,10 @@ const Welcome = () => {
 
 
                 {/* Right Side of Layout  */}
-                <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
+                <div className="flex flex-col lg:flex-row flex-1 justify-center items-center space-between w-full mf:mt-10 mt-10">
 
                     {/* Card  */}
-                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 md:w-80 w-full my-5 eth-card white-glassmorphism">
+                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full md:w-full my-5 lg:mr-2 eth-card white-glassmorphism">
                         <div className="flex justify-between flex-col w-full h-full">
                             <div className="flex justify-between items-start">
                                 <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
@@ -121,12 +121,12 @@ const Welcome = () => {
                     </div>
 
                     {/* Form  */}
-                    <div className="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism">
+                    <div className="p-5 sm:w-96 w-full md:w-full flex flex-col justify-start items-center lg:ml-2 blue-glassmorphism">
                         <Input type="text" placeholder="Address To" name="addressTo" handleChange={ handleChange } />
                         <Input type="number" placeholder="Amount (ETH)" name="amount" handleChange={ handleChange } />
                         <Input type="text" placeholder="Keyword (GIF)" name="keyword" handleChange={ handleChange } />
                         <Input type="text" placeholder="Enter message" name="message" handleChange={ handleChange } />
-
+ q
                         <div className="h-[1px] w-full bg-gray-400 my-2 " />
 
                         {
