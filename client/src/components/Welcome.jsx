@@ -74,7 +74,7 @@ const Welcome = () => {
                     )}
 
                     {/* Grid  */}
-                    <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
+                    <div className="grid sm:grid-cols-3 grid-cols-2 w-full my-10">
                         <div className={ `rounded-tl-2xl ${ commonStyles }` }>
                             Reliability
                         </div>
@@ -100,28 +100,8 @@ const Welcome = () => {
                 {/* Right Side of Layout  */}
                 <div className="flex flex-col lg:flex-row flex-1 justify-center items-center space-between w-full mf:mt-10 mt-10">
 
-                    {/* Card  */}
-                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full md:w-full my-5 lg:mr-2 eth-card white-glassmorphism">
-                        <div className="flex justify-between flex-col w-full h-full">
-                            <div className="flex justify-between items-start">
-                                <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
-                                    <SiEthereum fontSize={21} color="#ffffff" />
-                                </div>
-                                <p className="text-white font-semibold text-lg mt-1">
-                                    Ethereum
-                                </p>
-                            </div>
-                            <div>
-                                <p className="text-white font-light text-sm">
-                                    { shortenAddress(currentAccount) }
-                                </p>
-                                
-                            </div>
-                        </div>
-                    </div>
-
                     {/* Form  */}
-                    <div className="p-5 sm:w-96 w-full md:w-full flex flex-col justify-start items-center lg:ml-2 blue-glassmorphism">
+                    <div className="p-5 sm:w-96 w-full md:w-full flex flex-col justify-start items-center lg:mr-2 blue-glassmorphism">
                         <Input type="text" placeholder="Address To" name="addressTo" handleChange={ handleChange } />
                         <Input type="number" placeholder="Amount (ETH)" name="amount" handleChange={ handleChange } />
                         <Input type="text" placeholder="Keyword (GIF)" name="keyword" handleChange={ handleChange } />
@@ -144,6 +124,27 @@ const Welcome = () => {
                         }
 
                     </div>
+
+                    {/* Card  */}
+                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full md:w-full my-5 lg:ml-2 eth-card white-glassmorphism">
+                        <div className="flex justify-between flex-col w-full h-full">
+                            <div className="flex justify-between items-start">
+                                <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
+                                    <SiEthereum fontSize={21} color="#ffffff" />
+                                </div>
+                                <p className="text-white font-semibold text-lg mt-1">
+                                    Ethereum
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-white font-light text-sm">
+                                    { shortenAddress(currentAccount) }
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
