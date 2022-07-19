@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { TransactionContext } from "../context/TransactionContext";
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import logo from '../../images/logo-cryptex5.png';
@@ -14,6 +15,7 @@ const NavbarItem = ({ title, classProps }) => {
 const Navbar = () => {
     // Mobile state
     const [toggleMenu, setToggleMenu] = useState(false);
+    const { connectWallet, currentAccount } = useContext( TransactionContext );
 
 
     return (
@@ -22,10 +24,20 @@ const Navbar = () => {
                 <img src={logo} alt="Logo" className="w-32 cursor-pointer rounded-lg border-x-2" />
             </div>
             <ul className="text-white md:flex hidden list-none flex-row justify-between items-center flex-initial">
-                {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
+                {["", ""].map((item, index) => (
                     <NavbarItem key={ item + index } title={ item } />
                 ))}
-                <li className="bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]">
+                <li  
+                    className={ `mx-4 cursor-pointer` }
+                    onClick={ connectWallet } >
+                    Wallet
+                </li>
+                <li  className={ `mx-4 cursor-pointer` }>
+                    <a href="https://studioeternal.net/blog" target="_blank">
+                        Blog
+                    </a>
+                </li>
+                <li className="bg-[#007085] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#005065]">
                     Login
                 </li>
             </ul>
@@ -47,9 +59,19 @@ const Navbar = () => {
                             <AiOutlineClose onClick={() => setToggleMenu(false)} />
                         </li>
 
-                        {["Market", "Exchange", "Tutorials", "Wallets"].map((item, index) => (
+                        {["", ""].map((item, index) => (
                             <NavbarItem key={ item + index } title={ item } classProps="my-2 text-lg" />
                         ))}
+                        <li  
+                            className={ `mx-4 cursor-pointer` }
+                            onClick={ connectWallet } >
+                            Wallet
+                        </li>
+                        <li  className={ `mx-4 cursor-pointer` }>
+                            <a href="https://studioeternal.net/blog" target="_blank">
+                                Blog
+                            </a>
+                        </li>
                     </ul>
                 )}
             </div>

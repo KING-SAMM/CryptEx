@@ -46,16 +46,17 @@ const Welcome = () => {
 
     return (
         <div className="flex w-full justify-center items-center">
-            <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
+            <div className="flex flex-col items-start justify-between md:p-20 py-12 px-4">
+                
 
                 {/* Left Side of Layout  */}
-                <div className="flex flex-1 justify-start flex-col mf:mr-10">
+                <div className="flex flex-1 justify-center items-center flex-col mf:mr-10 md:w-[80vw] ">
 
                     {/* Large Welcome Text  */}
-                    <h1 className="text-3xl sm:text-5xl text-white text-gradient py-1">
+                    <h1 className="text-3xl md:text-20xl sm:text-5xl text-white text-gradient py-1">
                         Trade in Crypto <br /> Trade with CryptEx
                     </h1>
-                    <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
+                    <p className="text-center mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
                         Join millions on CryptEx - the largest cryptocurrency marketplace
                     </p>
 
@@ -64,7 +65,7 @@ const Welcome = () => {
                         <button
                             type="button"
                             onClick={ connectWallet }
-                            className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+                            className="flex flex-row justify-center items-center my-5 md:w-[70vw] lg:w-[50vw] bg-[#007085] p-3 rounded-full cursor-pointer hover:bg-[#005060]"
                         >
                             <p className="text-white text-base font-semibold">
                                 Connect Wallet
@@ -100,21 +101,21 @@ const Welcome = () => {
                 <div className="flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10">
 
                     {/* Card  */}
-                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card white-glassmorphism">
+                    <div className="p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 md:w-80 w-full my-5 eth-card white-glassmorphism">
                         <div className="flex justify-between flex-col w-full h-full">
                             <div className="flex justify-between items-start">
                                 <div className="w-10 h-10 rounded-full border-2 border-white flex justify-center items-center">
                                     <SiEthereum fontSize={21} color="#ffffff" />
                                 </div>
-                                <BsInfoCircle fontSize={17} color="#ffffff" />
+                                <p className="text-white font-semibold text-lg mt-1">
+                                    Ethereum
+                                </p>
                             </div>
                             <div>
                                 <p className="text-white font-light text-sm">
                                     { shortenAddress(currentAccount) }
                                 </p>
-                                <p className="text-white font-semibold text-lg mt-1">
-                                    Ethereum
-                                </p>
+                                
                             </div>
                         </div>
                     </div>
