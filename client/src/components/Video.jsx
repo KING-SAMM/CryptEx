@@ -1,11 +1,15 @@
 import React from 'react'
+import video from '../../vid/trading-graph-loop.mp4';
 
-function Video() {
+const Video = () => {
   return (
     <div className="h-[300px] overflow-y-hidden">
-      <video autoplay="autoplay" loop="loop" muted="muted" class="w-[100vw] mr-[-300px]">
-          <source src="../../vid/trading-graph-loop.webm" type="video/webm" />
-      </video>
+      <video 
+        src={ video } 
+        autoPlay 
+        loop 
+        muted
+        className="w-[100vw]"></video>
     </div>
       
   )

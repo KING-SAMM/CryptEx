@@ -16,9 +16,9 @@ body {
 .gradient-bg-welcome {
   background-color:#0f0e13;
   background-image: 
-    radial-gradient(at 0% 0%, rgb(12, 6, 43) 0, transparent 50%), 
+    radial-gradient(at 0% 0%, rgb(8, 7, 8) 0, transparent 50%), 
     radial-gradient(at 50% 0%, rgb(0, 118, 138) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, rgb(8, 7, 8) 0, transparent 50%);
+    radial-gradient(at 100% 0%, rgb(12, 6, 43) 0, transparent 50%);
 }
 
 .gradient-bg-services {
